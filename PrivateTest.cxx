@@ -12,28 +12,60 @@
  *   ----------------------------------------------------------------------------------   *
  ******************************************************************************************/
 
-#pragma once
+#include <BookApplicationSkel/ApplicationSkel.h>
+
+#define src_location std::source_location::current()
+#define out_fun     std::cout << src_location.function_name() << " :" <<
 
 
-#include <BookApplicationSkel/Interface.h>
-#include <AppBook/Util/Object.h>
-
-
-namespace Book
+namespace Skel
 {
 
-class APPSKEL_API ApplicationSkel : public Util::Object
+class Application : public Book::ApplicationSkel
 {
-
-    static void InstallSignals();
-    ApplicationSkel();
-
+protected:
+    Book::Result SetupAppBook();
 public:
-    ApplicationSkel();
-    ~ApplicationSkel() override();
+    Application(const std::string& BookName, int argc, char** argv);
+    ~Application() override;
+
+    Book::Result Setup() { return SetupAppBook(); }
+
 
 };
+
+
+Application::Application(const std::string& BookName, int argc, char** argv): Book::ApplicationSkel(BookName, argc,argv)
+{
+}
+
+
+Application::~Application()
+{
+
+}
+
+Book::Result Application::SetupAppBook()
+{
+
+    out_fun " Calling parent class :\n";
+    (void)Book::ApplicationSkel::Setup();
+    // ...
+    out_fun " Creating this test section:\n";
+    AppBook::CreateSection("Application.Tests").Open().CreateSectionContents("Output");
+
+    AppBook()["Application.Tests"]["Output"];
+
+    AppBook::Debug() << " Setup was Successful.!";
+    return Book::Result::Accepted;
+}
 
 }
 
 
+auto main(int argc, char** argv) -> int
+{
+    Skel::Application App("PrivateTest", argc,argv);
+    App.Setup();
+
+}

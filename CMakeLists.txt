@@ -12,8 +12,7 @@ add_library(
     ${TargetName}
     SHARED
     include/${TargetName}/Interface.h                   #global framework-wide macros definitions and dll export and import macros for MSVC.
-    include/${PROJECT_NAME}/Interface.h
-    include/${PROJECT_NAME}/Application.h			cxx/Application.cxx
+    include/${TargetName}/ApplicationSkel.h			    cxx/ApplicationSkel.cxx
 )
 target_compile_definitions(${TargetName} PUBLIC "${TargetName}_DEBUG=$<CONFIG:Debug>")
 target_compile_features(${TargetName} PUBLIC cxx_std_20)
@@ -33,8 +32,9 @@ target_link_libraries(${TargetName} ${CMAKE_DL_LIBS} AppBook)
 #add_executable(TestBook TestBook.cxx TestBook.h)
 #target_link_libraries(TestBook AppBook Lexer)
 
-#add_executable(Test.xApp main.cxx)
-#target_link_libraries(Test.xApp ${TargetName})
+add_executable(PrivateTest.xApp PrivateTest.cxx)
+target_link_libraries(PrivateTest.xApp ${TargetName})
+
 install(DIRECTORY
         include/${TargetName}/
         DESTINATION "${CMAKE_INSTALL_PREFIX}/include/${TargetName}"
