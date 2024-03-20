@@ -29,9 +29,7 @@ public:
     Application(const std::string& BookName, int argc, char** argv);
     ~Application() override;
 
-    Book::Result Setup() { return SetupAppBook(); }
-
-
+    Book::Result Run() override;
 };
 
 
@@ -45,11 +43,21 @@ Application::~Application()
 
 }
 
+Book::Result Application::Run()
+{
+    auto R = SetupAppBook();
+    if (!R)
+        return R;
+    
+    AppBook::Debug() << " The Setup process went well and there is the end of the tests for now " << Utf::Glyph::Happy2;
+    return Book::Result::Ok;
+}
+
 Book::Result Application::SetupAppBook()
 {
 
     out_fun " Calling parent class :\n";
-    (void)Book::ApplicationSkel::Setup();
+    (void)Setup();
     // ...
     out_fun " Creating this test section:\n";
     AppBook::CreateSection("Application.Tests").Open().CreateSectionContents("Output");
@@ -63,9 +71,11 @@ Book::Result Application::SetupAppBook()
 }
 
 
+
 auto main(int argc, char** argv) -> int
 {
     Skel::Application App("PrivateTest", argc,argv);
-    App.Setup();
+    return static_cast<int>(App.Run());
 
 }
+

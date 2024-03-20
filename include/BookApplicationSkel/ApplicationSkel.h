@@ -30,13 +30,13 @@ class APPSKEL_API ApplicationSkel : public Util::Object
 
     StrAcc::CArray mArgs;
 protected:
-    virtual Book::Result Setup(); ///< Call first from the derived::Setup(), then continue the Setting up...
+    virtual Result Setup(); ///< Call first from the derived::Setup(), then continue the Setting up...
 
 public:
     ApplicationSkel(const std::string& AppName, int argc=0, char** argv=nullptr);
     ~ApplicationSkel() override;
 
-    ;
+    virtual Result Run()=0;
 
 };
 

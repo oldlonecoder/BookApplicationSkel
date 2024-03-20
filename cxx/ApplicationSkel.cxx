@@ -82,6 +82,13 @@ ApplicationSkel::~ApplicationSkel()
     out_fun " Return code from AppBook::End(): " << Str() << std::endl;
 }
 
+//Result ApplicationSkel::Run()
+//{
+//    throw AppBook::Exception()[AppBook::Fatal() << "Cannot be invoked from this base Application class!"];
+//
+//    return {};
+//}
+
 ApplicationSkel::ApplicationSkel(const std::string &AppName, int argc, char** argv) : Object(nullptr, AppName)
 {
     _APP = this;
