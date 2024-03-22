@@ -92,7 +92,7 @@ ApplicationSkel::~ApplicationSkel()
 ApplicationSkel::ApplicationSkel(const std::string &AppName, int argc, char** argv) : Object(nullptr, AppName)
 {
     _APP = this;
-    out_fun " Begin appbook: " << AppName << ":\n";
+    out_fun " Begin AppBook: " << AppName << ":\n";
     (void)AppBook::Begin(AppName);
     //AppBook::Debug() << "Book '" << AppName << "' created...";
 
@@ -105,15 +105,17 @@ ApplicationSkel::ApplicationSkel(const std::string &AppName, int argc, char** ar
 
 Book::Result ApplicationSkel::Setup()
 {
-    out_fun " Install signals:\n";
+    // Systématique :
+    AppBook()["ApiLog"]["Out"];
+    AppBook::Debug() << "\" Install signals:";
     ApplicationSkel::InstallSignals();
-    out_fun " Creating section: " << "Section.ApplicationSkel :\n";
-    auto& Sec = AppBook::CreateSection("Section.ApplicationSkel");
+    AppBook::Debug() <<  " Creating section: " << "Skel :\n";
+    auto& Sec = AppBook::CreateSection("Skel");
 
-    out_fun " This section in Skel: '" << Sec.Id() << ":\n";
+    AppBook::Debug() <<  " This section in Skel: '" << Sec.Id() << ":";
     Sec.Open();
     Sec.CreateSectionContents("Skel-Library.journal");
-    AppBook::Instance()["Section.ApplicationSkel"]["Skel-Library.journal"];
+    AppBook()["Skel"]["Skel-Library.journal"];
 
     AppBook::Debug() << " Application Skel library journal started...";
     return Result::Success;

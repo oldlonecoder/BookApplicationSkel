@@ -60,11 +60,11 @@ Book::Result Application::SetupAppBook()
     (void)Setup();
     // ...
     out_fun " Creating this test section:\n";
-    AppBook::CreateSection("Application.Tests").Open().CreateSectionContents("Output");
+    AppBook::CreateSection("App").Open().CreateSectionContents("Output");
 
-    AppBook()["Application.Tests"]["Output"];
+    AppBook()["App"]["Output"];
 
-    AppBook::Debug() << " Setup was Successful.!";
+    AppBook::Debug() << " App: Section and contents Setup was Successful!";
     return Book::Result::Accepted;
 }
 
@@ -74,7 +74,7 @@ Book::Result Application::SetupAppBook()
 
 auto main(int argc, char** argv) -> int
 {
-    Skel::Application App("PrivateTest", argc,argv);
+    Skel::Application App("SkelTest", argc,argv);
     return static_cast<int>(App.Run());
 
 }
