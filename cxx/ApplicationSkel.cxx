@@ -106,13 +106,13 @@ ApplicationSkel::ApplicationSkel(const std::string &AppName, int argc, char** ar
 Book::Result ApplicationSkel::Setup()
 {
     // Systématique :
-    AppBook()["BookApi"]["Journal"];
+    Book::Select()["BookApi"]["Journal"];
     Book::Debug() << "\" Install signals:";
     ApplicationSkel::InstallSignals();
     Book::Debug() <<  " Creating section: " << "Skel :\n";
     auto& Sec = AppBook::CreateSection("Skel");
 
-    AppBook::Debug() <<  " This section in Skel: '" << Sec.Id() << ":";
+    Book::Debug() <<  " This section in Skel: '" << Sec.Id() << ":";
     Sec.Open();
     Sec.CreateSectionContents("Skel-Library.journal");
     Book::Select()["Skel"]["Skel-Library.journal"];
