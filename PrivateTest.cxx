@@ -49,7 +49,7 @@ Book::Result Application::Run()
     if (!R)
         return R;
     
-    AppBook::Debug() << " The Setup process went well and there is the end of the tests for now " << Utf::Glyph::Happy2;
+    Book::Debug() << " The Setup process went well and there it is the end of the tests for now " << Utf::Glyph::Happy2;
     return Book::Result::Ok;
 }
 
@@ -64,7 +64,7 @@ Book::Result Application::SetupAppBook()
 
     AppBook()["App"]["Output"];
 
-    AppBook::Debug() << " App: Section and contents Setup was Successful!";
+    Book::Debug() << " App: Section and contents Setup was Successful!";
     return Book::Result::Accepted;
 }
 

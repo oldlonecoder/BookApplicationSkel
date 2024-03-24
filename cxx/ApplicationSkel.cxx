@@ -106,18 +106,18 @@ ApplicationSkel::ApplicationSkel(const std::string &AppName, int argc, char** ar
 Book::Result ApplicationSkel::Setup()
 {
     // Systématique :
-    AppBook()["ApiLog"]["Out"];
-    AppBook::Debug() << "\" Install signals:";
+    AppBook()["BookApi"]["Journal"];
+    Book::Debug() << "\" Install signals:";
     ApplicationSkel::InstallSignals();
-    AppBook::Debug() <<  " Creating section: " << "Skel :\n";
+    Book::Debug() <<  " Creating section: " << "Skel :\n";
     auto& Sec = AppBook::CreateSection("Skel");
 
     AppBook::Debug() <<  " This section in Skel: '" << Sec.Id() << ":";
     Sec.Open();
     Sec.CreateSectionContents("Skel-Library.journal");
-    AppBook()["Skel"]["Skel-Library.journal"];
+    Book::Select()["Skel"]["Skel-Library.journal"];
 
-    AppBook::Debug() << " Application Skel library journal started...";
+    Book::Debug() << " Application Skel library journal started...";
     return Result::Success;
 }
 
