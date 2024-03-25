@@ -13,9 +13,10 @@
  ******************************************************************************************/
 
 #include <BookApplicationSkel/ApplicationSkel.h>
+#include <BookMarkup/MarkupTokens.h>
+#include <Lexer/Lexer.h>
 
-#define src_location std::source_location::current()
-#define out_fun     std::cout << src_location.function_name() << " :" <<
+
 
 
 namespace Skel
@@ -49,7 +50,20 @@ Book::Result Application::Run()
     if (!R)
         return R;
     
-    Book::Debug() << " The Setup process went well and there it is the end of the tests for now " << Utf::Glyph::Happy2;
+    Book::Debug() << " The Setup process went well..." << Utf::Glyph::Happy2;
+    Book::Debug() << " Now Begin testing the lexer ...";
+
+    //Book::MarkupTokens MarkupLang;
+    lex::TokenTable TT;
+    lex::Lexer Lex;
+    Lex.Config() = {
+        R"(
+      Hello, Word! -> Here is the #{Fg:Yellow} Markup Test! #{/}
+)",
+        &TT
+    };
+
+    return Lex();
 
     try {
         Book::Status() << " All is ok, test ok, Application ok! Bye!";
@@ -83,7 +97,8 @@ Book::Result Application::Setup()
 
     Book::Select()["App"]["Output"];
 
-    Book::Debug() << " App: Section and contents Setup was Successful!";
+    Book::Debug() << " App: Section and contents Setup was Successful";
+
     return Book::Result::Accepted;
 }
 
