@@ -103,6 +103,8 @@ ApplicationSkel::ApplicationSkel(const std::string &AppName, int argc, char** ar
 
 }
 
+
+
 Book::Result ApplicationSkel::Setup()
 {
     // Systématique :

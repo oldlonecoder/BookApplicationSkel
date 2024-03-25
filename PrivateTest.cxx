@@ -24,7 +24,7 @@ namespace Skel
 class Application : public Book::ApplicationSkel
 {
 protected:
-    Book::Result SetupAppBook();
+    Book::Result Setup() override;
 public:
     Application(const std::string& BookName, int argc, char** argv);
     ~Application() override;
@@ -45,24 +45,43 @@ Application::~Application()
 
 Book::Result Application::Run()
 {
-    auto R = SetupAppBook();
+    auto R = Setup();
     if (!R)
         return R;
     
     Book::Debug() << " The Setup process went well and there it is the end of the tests for now " << Utf::Glyph::Happy2;
+
+    try {
+        Book::Status() << " All is ok, test ok, Application ok! Bye!";
+    }
+    catch(AppBook::Exception& E)
+    {
+        Book::Except() << " What:" << E.what();
+    }
+    catch(std::exception& E)
+    {
+        Book::Except() << " What:" << E.what();
+    }
+    catch(const char* E)
+    {
+        Book::Except() << E;
+    }
+
+    //AppBook::Close();
+
     return Book::Result::Ok;
 }
 
-Book::Result Application::SetupAppBook()
+Book::Result Application::Setup()
 {
 
-    out_fun " Calling parent class :\n";
-    (void)Setup();
+    Book::Debug() << " Calling parent class :\n";
+    (void) ApplicationSkel::Setup();
     // ...
-    out_fun " Creating this test section:\n";
+    Book::Debug() << " Creating this test section:\n";
     AppBook::CreateSection("App").Open().CreateSectionContents("Output");
 
-    AppBook()["App"]["Output"];
+    Book::Select()["App"]["Output"];
 
     Book::Debug() << " App: Section and contents Setup was Successful!";
     return Book::Result::Accepted;
@@ -76,6 +95,5 @@ auto main(int argc, char** argv) -> int
 {
     Skel::Application App("SkelTest", argc,argv);
     return static_cast<int>(App.Run());
-
 }
 
