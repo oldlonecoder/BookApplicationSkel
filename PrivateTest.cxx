@@ -54,7 +54,7 @@ Book::Result Application::Run()
     Book::Debug() << " Now Begin testing the lexer ...";
 
     //Book::MarkupTokens MarkupLang;
-    lex::TokenTable TT;
+    Book::MarkupTokens TT;
     lex::Lexer Lex;
     Lex.Config() = {
         R"(
@@ -62,6 +62,7 @@ Book::Result Application::Run()
 )",
         &TT
     };
+
 
     return Lex();
 
