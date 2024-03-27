@@ -64,10 +64,10 @@ Book::Result Application::Run()
     };
 
 
-    return Lex();
-
     try {
         Book::Status() << " All is ok, test ok, Application ok! Bye!";
+        R = Lex();
+        TT.DebugDumpProduct();
     }
     catch(AppBook::Exception& E)
     {
