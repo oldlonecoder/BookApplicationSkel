@@ -12,9 +12,11 @@ add_library(
     ${TargetName}
     SHARED
     include/${TargetName}/Interface.h                   #global framework-wide macros definitions and dll export and import macros for MSVC.
-    include/${TargetName}/ApplicationSkel.h             cxx/ApplicationSkel.cxx
-    include/BookMarkup/MarkupTokens.h                   cxx/BookMarkup/MarkupTokens.cxx
-    include/BookMarkup/MarkupCompiler.h                 cxx/BookMarkup/MarkupCompiler.cxx
+    include/${TargetName}/ApplicationSkel.h cxx/ApplicationSkel.cxx
+    include/BookMarkup/MarkupTokens.h cxx/BookMarkup/MarkupTokens.cxx
+    include/BookMarkup/MarkupCompiler.h cxx/BookMarkup/MarkupCompiler.cxx
+    cxx/BookMarkup/MkAttribute.cxx
+    include/BookMarkup/MkAttribute.h
 
 
 )

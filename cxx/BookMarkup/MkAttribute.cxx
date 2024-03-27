@@ -2,8 +2,7 @@
 // Created by oldlonecoder on 24-03-27.
 //
 
-//#ifndef BOOKAPPLICATIONSKEL_MARKUPCOMPILER_H
-//#define BOOKAPPLICATIONSKEL_MARKUPCOMPILER_H
+#include "BookMarkup/MkAttribute.h"
 
 /******************************************************************************************
  *   Copyright (C) 1965/1987/2023 by Serge Lussier                                        *
@@ -19,29 +18,11 @@
  *   ----------------------------------------------------------------------------------   *
  ******************************************************************************************/
 
-#pragma once
-#include <BookMarkup/MkAttribute.h>
+//#pragma once
 
-#include <Lexer/Lexer.h>
+
 
 
 namespace Book
 {
-
-/*!
- * @brief
- *
- * @note  " ... #{ MKAttribute } ... " Sequence
- */
-class APPSKEL_API MarkupCompiler
-{
-
-
-
-
-
-};
-
 } // Book
-
-//#endif //BOOKAPPLICATIONSKEL_MARKUPCOMPILER_H
